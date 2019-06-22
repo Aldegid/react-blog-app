@@ -1,0 +1,10 @@
+.dummy {
+  text-align: center;
+}
+
+.dummy h1 {
+  padding-top: 100px;
+  font-size: 50px;
+  font-family: 'Abril Fatface', cursive;
+  color: #3f3e40;
+}

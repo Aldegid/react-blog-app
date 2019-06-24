@@ -29,4 +29,11 @@
   width: 100%;
   margin-top: auto;
   cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.blog__button:hover {
+  background-color: tomato;
 }

@@ -16,8 +16,9 @@ class App extends Component {
         <Switch>
           <Route path='/' component={Dummy} exact />
           <Route path='/blog' component={BlogPostsList} exact />
+          {/* <Route path='/blog/post' component={BlogPostDetails} /> */}
           <Route
-            path='/blog/post/:id'
+            path='/blog/posts/:id'
             render={({ match }) => {
               console.log(match);
               const { id } = match.params;

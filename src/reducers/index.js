@@ -1,15 +1,13 @@
-const reducer = (state, action) => {
-  if (state === undefined) {
-    return {
-      posts: [],
-      post: null,
-      isLoaded: false,
-      error: false,
-      isLoggedOn: false,
-      loginButtonValue: 'Login'
-    };
-  }
+const initialState = {
+  posts: [],
+  post: null,
+  isLoaded: false,
+  error: false,
+  isLoggedOn: false,
+  loginButtonValue: 'Login'
+};
 
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_POSTS_REQUEST':
       return {

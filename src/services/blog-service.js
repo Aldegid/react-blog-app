@@ -46,4 +46,15 @@ export default class BlogService {
     }
     return await res.json();
   };
+
+  deletePost = async postId => {
+    const res = await fetch(`${this._apiBase}/posts/${postId}`, {
+      method: 'DELETE'
+    });
+    if (res.status !== 200) {
+      throw new Error(res.statusText);
+    }
+
+    return await res.json;
+  };
 }

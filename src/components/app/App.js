@@ -4,6 +4,7 @@ import BlogHeader from '../blog-header';
 import Dummy from '../dummy';
 import BlogPostsList from '../blog-posts-list';
 import BlogPostDetails from '../blog-post-details';
+import Login from '../login';
 
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -15,12 +16,11 @@ class App extends Component {
         <BlogHeader />
         <Switch>
           <Route path='/' component={Dummy} exact />
-          <Route path='/blog' component={BlogPostsList} exact />
-          {/* <Route path='/blog/post' component={BlogPostDetails} /> */}
+          <Route path='/posts' component={BlogPostsList} exact />
+          <Route path='/login' component={Login} />
           <Route
-            path='/blog/posts/:id'
+            path='/posts/:id'
             render={({ match }) => {
-              console.log(match);
               const { id } = match.params;
               return <BlogPostDetails id={id} />;
             }}

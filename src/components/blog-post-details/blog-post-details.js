@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { withBlogService } from '../hoc';
 import { bindActionCreators } from 'redux';
 import { fetchPostDetails } from '../actions';
+import Loader from '../loader';
+import ErrorIndicator from '../error-indicator';
+
+import './blog-post-details.css';
 
 class BlogPostDetails extends Component {
   state = {
@@ -21,8 +25,8 @@ class BlogPostDetails extends Component {
     this.setState({ value: '' });
   };
 
-  onHandleChange = e => {
-    this.setState({ value: e.target.value });
+  onHandleChange = ({ target }) => {
+    this.setState({ value: target.value });
   };
 
   componentDidMount() {
@@ -30,17 +34,25 @@ class BlogPostDetails extends Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, error } = this.props;
+
     if (!post) {
-      return 'Loading';
+      return <Loader />;
+    }
+
+    if (error) {
+      return <ErrorIndicator />;
     }
     return (
       <div className='post__details'>
         <h2 className='post__details-header'>{post.title}</h2>
         <p className='post__details-content'>{post.body}</p>
-        <ul>
+        <h3>Comments:</h3>
+        <ul className='post__details-list'>
           {post.comments.map(comment => (
-            <li key={comment.id}>{comment.body}</li>
+            <li className='post__details-item' key={comment.id}>
+              {comment.body}
+            </li>
           ))}
         </ul>
         <form onSubmit={this.onCommentAdd}>
@@ -49,8 +61,10 @@ class BlogPostDetails extends Component {
             id='comment'
             value={this.state.value}
             onChange={this.onHandleChange}
+            className='post__details-textarea'
+            required
           />
-          <button>Add Comment</button>
+          <button className='post__details-button'>Add Comment</button>
         </form>
       </div>
     );

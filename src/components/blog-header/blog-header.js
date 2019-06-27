@@ -12,7 +12,8 @@ const BlogHeader = () => {
       </Link>
       <div className='menu'>
         <Link to='/'>Home</Link>
-        <Link to='/blog'>Blog</Link>
+        <Link to='/posts'>Posts</Link>
+        <Link to='/login'>Login</Link>
       </div>
     </header>
   );

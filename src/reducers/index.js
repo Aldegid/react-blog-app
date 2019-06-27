@@ -4,48 +4,60 @@ const reducer = (state, action) => {
       posts: [],
       post: null,
       isLoaded: false,
-      error: false
+      error: false,
+      isLoggedOn: false,
+      loginButtonValue: 'Login'
     };
   }
-  console.log(action.type);
+
   switch (action.type) {
     case 'FETCH_POSTS_REQUEST':
       return {
-        posts: [],
-        post: null,
-        isLoaded: false,
-        error: false
+        ...state
       };
 
     case 'FETCH_POSTS_SUCCESS':
       return {
+        ...state,
         posts: action.payload,
-        post: null,
         isLoaded: true,
-        error: null
+        error: false
       };
     case 'FETCH_POSTS_ERROR':
       return {
+        ...state,
         posts: [],
-        post: null,
         isLoaded: false,
         error: true
       };
 
     case 'FETCH_POST_DETAILS_REQUEST':
       return {
-        posts: state.posts,
-        post: null,
-        isLoaded: state.isLoaded,
-        error: state.error
+        ...state
       };
+
     case 'FETCH_POST_DETAILS_SUCCESS':
       return {
-        posts: state.posts,
-        post: action.payload,
-        isLoaded: state.isLoaded,
-        error: state.error
+        ...state,
+        isLoaded: true,
+        post: action.payload
       };
+
+    case 'FETCH_POST_DETAILS_FAILURE':
+      return {
+        ...state,
+        post: null,
+        error: true
+      };
+
+    case 'PERFORM_LOGIN':
+      return {
+        ...state,
+        isLoggedOn: (state.isLoggedOn = !state.isLoggedOn),
+        loginButtonValue:
+          state.loginButtonValue === 'Login' ? 'Logout' : 'Login'
+      };
+
     default:
       return state;
   }

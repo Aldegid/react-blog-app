@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchPosts } from '../actions';
 import { withBlogService } from '../hoc';
+import PostAddForm from '../post-add-form';
+import ErrorIndicator from '../error-indicator';
 
 import './blog-posts-list.css';
 
@@ -13,34 +15,44 @@ class BlogPostsList extends Component {
     this.props.fetchPosts();
   }
 
+  performPostDelete = id => {
+    this.props.blogService
+      .deletePost(id)
+      .then(data => (data ? this.props.fetchPosts() : null));
+  };
+
   render() {
-    // console.log(this.props);
-    const { posts, isLoaded } = this.props;
+    const { posts, isLoaded, isLoggedOn, error } = this.props;
     if (!isLoaded) {
       return <Loader />;
     }
+    if (error) {
+      return <ErrorIndicator />;
+    }
     return (
-      <div className='blog__container'>
-        {posts.map(post => {
-          const postPreview =
-            post.body.length > 150
-              ? `${post.body.substr(0, 120)} ...`
-              : post.body;
-          const postTitle =
-            post.title.length > 40
-              ? `${post.title.substr(0, 40)} ...`
-              : post.title;
+      <React.Fragment>
+        <PostAddForm />
+        <div className='blog__container'>
+          {posts.map(post => {
+            const { body, title, id } = post;
+            const postPreview =
+              post.body.length > 150 ? `${body.substr(0, 120)} ...` : body;
+            const postTitle =
+              title.length > 40 ? `${title.substr(0, 40)} ...` : title;
 
-          return (
-            <BlogPost
-              key={post.id}
-              title={postTitle}
-              body={postPreview}
-              id={post.id}
-            />
-          );
-        })}
-      </div>
+            return (
+              <BlogPost
+                key={id}
+                title={postTitle}
+                body={postPreview}
+                id={id}
+                performPostDelete={() => this.performPostDelete(id)}
+                isLoggedOn={isLoggedOn}
+              />
+            );
+          })}
+        </div>
+      </React.Fragment>
     );
   }
 }

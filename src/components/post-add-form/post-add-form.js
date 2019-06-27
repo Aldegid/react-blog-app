@@ -53,9 +53,6 @@ class PostAddForm extends Component {
     );
   }
 }
-const mapStateToProps = () => props => {
-  return props;
-};
 
 const mapDispatchToProps = (dispatch, { blogService }) => {
   return bindActionCreators(
@@ -68,7 +65,7 @@ const mapDispatchToProps = (dispatch, { blogService }) => {
 
 export default withBlogService()(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )(PostAddForm)
 );

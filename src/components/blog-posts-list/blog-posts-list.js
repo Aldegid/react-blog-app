@@ -36,7 +36,7 @@ class BlogPostsList extends Component {
           {posts.map(post => {
             const { body, title, id } = post;
             const postPreview =
-              post.body.length > 150 ? `${body.substr(0, 120)} ...` : body;
+              post.body.length > 120 ? `${body.substr(0, 120)} ...` : body;
             const postTitle =
               title.length > 40 ? `${title.substr(0, 40)} ...` : title;
 
@@ -57,8 +57,8 @@ class BlogPostsList extends Component {
   }
 }
 
-const mapStateToProps = () => props => {
-  return props;
+const mapStateToProps = () => ({ posts, isLoaded, isLoggedOn, error }) => {
+  return { posts, isLoaded, isLoggedOn, error };
 };
 
 const mapDispatchToProps = (dispatch, { blogService }) => {

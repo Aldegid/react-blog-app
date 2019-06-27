@@ -71,8 +71,8 @@ class BlogPostDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return state;
+const mapStateToProps = ({ post, error }) => {
+  return { post, error };
 };
 
 const mapDispatchToProps = (dispatch, { blogService }) => {

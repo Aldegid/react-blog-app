@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withBlogService } from '../hoc';
 import { bindActionCreators } from 'redux';
-import { fetchPostDetails } from '../actions';
+import { fetchPostDetails } from '../../redux/post-details';
 import Loader from '../loader';
 import ErrorIndicator from '../error-indicator';
 
@@ -71,7 +71,7 @@ class BlogPostDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ post, error }) => {
+const mapStateToProps = ({ postDetails: { post, error } }) => {
   return { post, error };
 };
 

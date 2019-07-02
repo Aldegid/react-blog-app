@@ -38,13 +38,6 @@ const postDetailsError = error => {
   };
 };
 
-export const postClicked = postId => {
-  return {
-    type: 'FETCH_POST_SUCCESS',
-    payload: postId
-  };
-};
-
 export const performLogin = () => {
   return {
     type: 'PERFORM_LOGIN'

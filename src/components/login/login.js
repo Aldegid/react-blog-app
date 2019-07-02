@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { performLogin } from '../actions';
+import { performLogin } from '../../redux/login';
 
 import './login.css';
 
@@ -15,7 +15,7 @@ const Login = ({ loginButtonValue, performLog }) => {
   );
 };
 
-const mapStateToProps = ({ loginButtonValue }) => {
+const mapStateToProps = ({ login: { loginButtonValue } }) => {
   return {
     loginButtonValue
   };

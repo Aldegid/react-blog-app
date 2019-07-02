@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
     case 'PERFORM_LOGIN':
       return {
         ...state,
-        isLoggedOn: (state.isLoggedOn = !state.isLoggedOn),
+        isLoggedOn: !state.isLoggedOn,
         loginButtonValue:
           state.loginButtonValue === 'Login' ? 'Logout' : 'Login'
       };

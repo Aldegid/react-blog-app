@@ -1,7 +1,7 @@
 import React from 'react';
-import './dummy.css';
+import './home.css';
 
-const Dummy = () => {
+const Home = () => {
   return (
     <div className='dummy'>
       <h1>Welcome to Cool Story Blog</h1>
@@ -9,4 +9,4 @@ const Dummy = () => {
   );
 };
 
-export default Dummy;
+export default Home;

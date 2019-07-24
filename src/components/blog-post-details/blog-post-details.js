@@ -13,15 +13,14 @@ class BlogPostDetails extends Component {
     inputValue: ''
   };
 
-  onCommentAdd = e => {
+  onCommentAdd = async e => {
     e.preventDefault();
-    const { id, fetchPostDetails } = this.props;
+    const { id, fetchPostDetails, blogService } = this.props;
 
     const postId = parseInt(id);
 
-    this.props.blogService
-      .addComment(postId, this.state.value)
-      .then(data => (data ? fetchPostDetails(id) : null));
+    await blogService.addComment(postId, this.state.value);
+    fetchPostDetails(postId);
     this.setState({ value: '' });
   };
 

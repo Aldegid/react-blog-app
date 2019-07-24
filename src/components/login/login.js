@@ -4,20 +4,20 @@ import { performLogin } from '../../redux/login';
 
 import './login.css';
 
-const Login = ({ loginButtonValue, performLog }) => {
+const Login = ({ isLoggedOn, performLog }) => {
   return (
     <div className='login'>
       <h2>Please log in to be able to delete posts.</h2>
       <button type='button' className='login__button' onClick={performLog}>
-        {loginButtonValue}
+        {isLoggedOn ? 'Logout' : 'Login'}
       </button>
     </div>
   );
 };
 
-const mapStateToProps = ({ login: { loginButtonValue } }) => {
+const mapStateToProps = ({ login: { isLoggedOn } }) => {
   return {
-    loginButtonValue
+    isLoggedOn
   };
 };
 

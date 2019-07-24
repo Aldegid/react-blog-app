@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPosts } from '../actions';
+import { fetchPosts } from '../../redux/posts';
 import { withBlogService } from '../hoc';
 
 import './post-add-form.css';
@@ -14,17 +14,17 @@ class PostAddForm extends Component {
   };
 
   handleChange = ({ target }) => {
-    const currentTarget = target.name === 'postadd' ? 'text' : 'title';
     this.setState({
-      [currentTarget]: target.value
+      [target.name]: target.value
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
+    const { title, text } = this.state;
+    const { blogService, fetchPosts } = this.props;
     e.preventDefault();
-    this.props.blogService
-      .addPost(this.state.title, this.state.text)
-      .then(data => (data ? this.props.fetchPosts() : null));
+    await blogService.addPost(title, text);
+    fetchPosts();
     this.setState({
       title: '',
       text: ''
@@ -36,13 +36,14 @@ class PostAddForm extends Component {
       <form onSubmit={this.handleSubmit} className='post__add'>
         <input
           type='text'
+          name='title'
           onChange={this.handleChange}
           value={this.state.title}
           className='post_add-title post_add-item'
           placeholder='post title...'
         />
         <textarea
-          name='postadd'
+          name='text'
           onChange={this.handleChange}
           value={this.state.text}
           className='post_add-textarea'

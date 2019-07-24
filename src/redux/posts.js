@@ -50,7 +50,7 @@ const postsLoaded = postsList => {
 
 const postsError = error => {
   return {
-    type: 'FETCH_POSTS_FAILURE',
+    type: 'FETCH_POSTS_ERROR ',
     payload: error
   };
 };

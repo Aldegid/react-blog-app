@@ -15,10 +15,9 @@ class BlogPostsList extends Component {
     this.props.fetchPosts();
   }
 
-  performPostDelete = id => {
-    this.props.blogService
-      .deletePost(id)
-      .then(data => (data ? this.props.fetchPosts() : null));
+  performPostDelete = async id => {
+    await this.props.blogService.deletePost(id);
+    this.props.fetchPosts();
   };
 
   render() {
@@ -36,9 +35,13 @@ class BlogPostsList extends Component {
           {postsList.map(post => {
             const { body, title, id } = post;
             const postPreview =
-              post.body.length > 120 ? `${body.substr(0, 120)} ...` : body;
+              body.length && body.length > 120
+                ? `${body.substr(0, 120)} ...`
+                : body;
             const postTitle =
-              title.length > 40 ? `${title.substr(0, 40)} ...` : title;
+              title.length && title.length > 40
+                ? `${title.substr(0, 40)} ...`
+                : title;
 
             return (
               <BlogPost
@@ -57,10 +60,10 @@ class BlogPostsList extends Component {
   }
 }
 
-const mapStateToProps = () => ({
-  posts: { postsList, isLoaded, error },
-  login: { isLoggedOn }
-}) => {
+const mapStateToProps = (
+  { posts: { postsList, isLoaded, error }, login: { isLoggedOn } },
+  ownProps
+) => {
   return {
     postsList,
     isLoaded,

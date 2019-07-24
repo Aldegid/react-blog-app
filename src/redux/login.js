@@ -1,17 +1,14 @@
 const PERFORM_LOGIN = 'PERFORM_LOGIN';
 
 const initialState = {
-  isLoggedOn: false,
-  loginButtonValue: 'Login'
+  isLoggedOn: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case PERFORM_LOGIN:
       return {
-        isLoggedOn: !state.isLoggedOn,
-        loginButtonValue:
-          state.loginButtonValue === 'Login' ? 'Logout' : 'Login'
+        isLoggedOn: !state.isLoggedOn
       };
     default:
       return state;
